@@ -1,6 +1,6 @@
 ﻿namespace CnabGenerator.Models
 {
-    public class BankItem
+    public class IssuingInstitution
     {
         public long Id { get; set; }
         public string Code { get; set; }

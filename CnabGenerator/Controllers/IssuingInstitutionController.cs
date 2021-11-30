@@ -9,45 +9,45 @@ using CnabGenerator.Models;
 
 namespace CnabGenerator.Controllers
 {
-    [Route("api/BankItems")]
     [ApiController]
-    public class BankItemsController : ControllerBase
+    [Route("api/IssuingInstitution")]
+    public class IssuingInstitutionController : ControllerBase
     {
         private readonly CnabGeneratorContext _context;
 
-        public BankItemsController(CnabGeneratorContext context)
+        public IssuingInstitutionController(CnabGeneratorContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BankItem>>> GetBankItems()
+        public async Task<ActionResult<IEnumerable<IssuingInstitution>>> GetIssuingInstitutons()
         {
-            return await _context.BankItems.ToListAsync();
+            return await _context.IssuingInstitutions.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BankItem>> GetBankItem(long id)
+        public async Task<ActionResult<IssuingInstitution>> GetIssuingInstituton(long id)
         {
-            var bankItem = await _context.BankItems.FindAsync(id);
+            var issuingInstituton = await _context.IssuingInstitutions.FindAsync(id);
 
-            if (bankItem == null)
+            if (issuingInstituton == null)
             {
                 return NotFound();
             }
 
-            return bankItem;
+            return issuingInstituton;
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBankItem(long id, BankItem bankItem)
+        public async Task<IActionResult> PutIssuingInstituton(long id, IssuingInstitution issuingInstituton)
         {
-            if (id != bankItem.Id)
+            if (id != issuingInstituton.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(bankItem).State = EntityState.Modified;
+            _context.Entry(issuingInstituton).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace CnabGenerator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BankItemExists(id))
+                if (!IssuingInstitutonExists(id))
                 {
                     return NotFound();
                 }
@@ -69,32 +69,32 @@ namespace CnabGenerator.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BankItem>> PostBankItem(BankItem bankItem)
+        public async Task<ActionResult<IssuingInstitution>> PostIssuingInstituton(IssuingInstitution issuingInstituton)
         {
-            _context.BankItems.Add(bankItem);
+            _context.IssuingInstitutions.Add(issuingInstituton);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetBankItem).ToLower(), new { id = bankItem.Id }, bankItem);
+            return CreatedAtAction(nameof(GetIssuingInstituton).ToLower(), new { id = issuingInstituton.Id }, issuingInstituton);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBankItem(long id)
+        public async Task<IActionResult> DeleteIssuingInstituton(long id)
         {
-            var bankItem = await _context.BankItems.FindAsync(id);
-            if (bankItem == null)
+            var issuingInstituton = await _context.IssuingInstitutions.FindAsync(id);
+            if (issuingInstituton == null)
             {
                 return NotFound();
             }
 
-            _context.BankItems.Remove(bankItem);
+            _context.IssuingInstitutions.Remove(issuingInstituton);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BankItemExists(long id)
+        private bool IssuingInstitutonExists(long id)
         {
-            return _context.BankItems.Any(e => e.Id == id);
+            return _context.IssuingInstitutions.Any(e => e.Id == id);
         }
 
         //private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>

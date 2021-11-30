@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CnabGenerator.Models
 {
@@ -10,6 +9,6 @@ namespace CnabGenerator.Models
         {
         }
 
-        public DbSet<BankItem> BankItems { get; set; } = null!;
+        public DbSet<IssuingInstitution> IssuingInstitutions { get; set; } = null!;
     }
 }
